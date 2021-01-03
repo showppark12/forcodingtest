@@ -1,0 +1,14 @@
+t = int(input())
+for i in range(t):
+  s = []
+  n = int(input())
+  for k in range(2):
+    s.append(list(map(int, input().split())))
+  #1index 에서는 왼쪽 대각선을 합한
+  s[0][1] += s[1][0]
+  s[1][1] += s[0][0]
+  #2index 부터는 왼쪽 대간선의 합한 값과 두번떨어져있는 대각선 값중 더 큰값
+  for j in range(2, n):
+    s[0][j] += max(s[1][j - 1], s[1][j - 2])
+    s[1][j] += max(s[0][j - 1], s[0][j - 2])
+  print(max(s[0][n - 1], s[1][n - 1]))
